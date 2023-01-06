@@ -10,6 +10,7 @@
           <img
             src="../static/images/logo.png"
             alt="SOUND PARTNER"
+            @click="scrollTo('top')"
           >
         </NuxtLink>
       </div>
@@ -29,7 +30,7 @@
           <v-btn
             class="common-btn nav-btn"
             depressed
-            @click="scrollTo('moto')"
+            @click="scrollTo('pros')"
           >
             Что мы предлагаем?
           </v-btn>
@@ -39,7 +40,7 @@
           <v-btn
             class="common-btn nav-btn"
             depressed
-            @click="scrollTo('us')"
+            @click="scrollTo('clients')"
           >
             Наши клиенты
           </v-btn>
@@ -49,7 +50,7 @@
           <v-btn
             class="common-btn nav-btn"
             depressed
-            @click="scrollTo('feedback')"
+            @click="scrollTo('how-it-works')"
           >
             Как это работает?
           </v-btn>
@@ -103,6 +104,7 @@
                 <v-btn
                   class="common-btn nav-btn"
                   depressed
+                  @click="scrollTo('pros')"
                 >
                   Что мы предлагаем?
                 </v-btn>
@@ -114,6 +116,7 @@
                 <v-btn
                   class="common-btn nav-btn"
                   depressed
+                  @click="scrollTo('clients')"
                 >
                   Наши клиенты
                 </v-btn>
@@ -125,6 +128,7 @@
                 <v-btn
                   class="common-btn nav-btn"
                   depressed
+                  @click="scrollTo('how-it-works')"
                 >
                   Как это работает?
                 </v-btn>
@@ -132,25 +136,21 @@
             </v-list-item>
 
             <v-list-item>
-              <NuxtLink :to="{ path: '/' }">
-                <v-btn
-                  class="common-btn nav-btn"
-                  depressed
-                >
-                  Вход
-                </v-btn>
-              </NuxtLink>
+              <v-btn
+                class="common-btn nav-btn"
+                depressed
+              >
+                Вход
+              </v-btn>
             </v-list-item>
 
             <v-list-item>
-              <NuxtLink :to="{ path: '/' }">
-                <v-btn
-                  class="common-btn action-btn"
-                  depressed
-                >
-                  Попробовать Демо
-                </v-btn>
-              </NuxtLink>
+              <v-btn
+                class="common-btn action-btn"
+                depressed
+              >
+                Попробовать Демо
+              </v-btn>
             </v-list-item>
           </v-list>
         </v-menu>

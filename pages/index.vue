@@ -66,7 +66,10 @@
       </div>
     </div>
 
-    <div class="pros">
+    <div
+      id="pros"
+      class="pros"
+    >
       <div class="content-container">
         <v-row>
           <v-col
@@ -112,7 +115,10 @@
       </div>
     </div>
 
-    <div class="clients">
+    <div
+      id="clients"
+      class="clients"
+    >
       <div class="content-container">
         <v-row>
           <v-col
@@ -151,7 +157,10 @@
       </div>
     </div>
 
-    <div class="how-it-works">
+    <div
+      id="how-it-works"
+      class="how-it-works"
+    >
       <div class="content-container">
         <h2>Как это работает</h2>
         <v-row>

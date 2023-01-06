@@ -30,7 +30,6 @@
           <v-col cols="5">
             <div class="hero-music">
               <TrackSingle
-                ref="trackFirst"
                 class="mb-5"
                 file="../audio/six-days.mp3"
               />
@@ -218,11 +217,7 @@ export default {
     }
   },
   mounted () {},
-  methods: {
-    playFirstTrack () {
-      console.log(this.$refs['trackFirst'])
-    }
-  }
+  methods: {}
 }
 </script>
 
@@ -288,9 +283,9 @@ export default {
         content: "";
         display: block;
         position: absolute;
-        top: -50px;
+        top: 80px;
         width: 640px;
-        height: 470px;
+        height: 350px;
         background: linear-gradient(360deg, #FFFFFF -10.63%, rgba(255, 255, 255, 0) 67.68%, rgba(255, 255, 255, 0) 129.89%);
         z-index: 2;
       }

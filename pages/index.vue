@@ -4,8 +4,10 @@
       <div class="content-container">
         <v-row>
           <v-col
-            cols="7"
+            cols="12"
             class="pt-10"
+            lg="7"
+            xs="12"
           >
             <h1>ФОНОВАЯ МУЗЫКА ДЛЯ ВАШЕГО БИЗНЕСА</h1>
             <p>Простой сервис для удобного управления музыкой</p>
@@ -27,7 +29,11 @@
               </v-btn>
             </div>
           </v-col>
-          <v-col cols="5">
+          <v-col
+            cols="12"
+            lg="5"
+            xs="12"
+          >
             <div class="hero-music">
               <TrackSingle
                 class="mb-5"
@@ -64,8 +70,10 @@
       <div class="content-container">
         <v-row>
           <v-col
-            cols="4"
+            cols="12"
             class="px-8"
+            lg="4"
+            xs="12"
           >
             <div class="amount">
               30%
@@ -75,8 +83,10 @@
             </p>
           </v-col>
           <v-col
-            cols="4"
+            cols="12"
             class="px-8"
+            lg="4"
+            xs="12"
           >
             <div class="amount">
               +50%
@@ -86,8 +96,10 @@
             </p>
           </v-col>
           <v-col
-            cols="4"
+            cols="12"
             class="px-8"
+            lg="4"
+            xs="12"
           >
             <div class="amount">
               +40%
@@ -103,7 +115,11 @@
     <div class="clients">
       <div class="content-container">
         <v-row>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <h2>Наши клиенты</h2>
             <ul>
               <li>Рестораны, кафе и бары;</li>
@@ -121,7 +137,11 @@
               Попробовать Демо
             </v-btn>
           </v-col>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <img
               src="../static/images/dj.png"
               alt="DJ"
@@ -135,36 +155,60 @@
       <div class="content-container">
         <h2>Как это работает</h2>
         <v-row>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <div class="feature">
               <b>Подбором музыки</b> и всей технической частью занимаются наши специалисты. Вам необходимо только написать Ваши пожелания к аудиофону
             </div>
           </v-col>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <div class="feature">
               <b>Вся музыка кешируется на музыкальной приставке</b>, и доступна даже без интернета. Таким образом достигается бесперебойное вещание музыки в заведении. Интернет требуется только для обновления контента
             </div>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <div class="feature">
               <b>Для запуска музыки</b> в заведении нужно пять минут. Достаточно просто подключить наш плеер к акустике в Вашем заведении
             </div>
           </v-col>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <div class="feature">
               <b>Запуск Вашей аудиорекламы</b> осуществляется по графику – рекламируйте проходящие у Вас акции, открытие новых заведений и любую другую информацию
             </div>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <div class="feature">
               <b>Во всех Ваших заведениях</b> одновременно будет играть один и тот же плейлист
             </div>
           </v-col>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <div class="feature">
               <b>Обновление музыки происходит</b> один раз в месяц, удаление не понравившихся композиций – в течение одного часа после информирования
             </div>
@@ -183,7 +227,11 @@
       <div class="content-container">
         <h2>Часто встречающиеся вопросы</h2>
         <v-row class="justify-center">
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <div class="feature">
               <h3>Помогаете ли вы подключать оборудование?</h3>
               Помогаем, наши инженеры делают это удалённо либо приезжают в заведение.
@@ -191,7 +239,11 @@
           </v-col>
         </v-row>
         <v-row class="justify-center">
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            lg="6"
+            xs="12"
+          >
             <div class="feature">
               <h3>Есть ли решение, если мы хотим использовать своё оборудование / нас не устраивает ваш плеер / мы хотим устроить разовое мероприятие на выезде?</h3>
               Есть. Мы можем предоставить Вам ссылку на он-лайнпоток Вашей музыки, она ничем не будет отличаться от того, что играет у Вас в заведении. Для этого подойдет любой телефон / планшет / ПК. И понадобится постоянный доступ в интернет
@@ -350,8 +402,7 @@ export default {
     }
 
     img {
-      width: 642px;
-      height: 541px;
+      width: 100%;
     }
   }
 
@@ -429,7 +480,23 @@ export default {
     }
   }
 
-  @media screen and (max-width: 900px) {
-    
+  @media screen and (max-width: 1263px) {
+    .hero-music {
+      margin-top: 100px;
+
+      &:after {
+        width: 100% !important;
+      }
+    }
+
+    .pros {
+
+      .amount {
+        font-weight: 600;
+        font-size: 90px;
+        line-height: 120px;
+        text-align: center;
+      }
+    }
   }
 </style>

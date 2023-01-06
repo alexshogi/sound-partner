@@ -72,7 +72,7 @@
         </v-btn>
       </div>
 
-      <!-- <nav class="nav-small">
+      <nav class="nav-small">
         <v-menu offset-y>
           <template #activator="{ on, attrs }">
             <v-btn
@@ -80,10 +80,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon
-                dark
-                right
-              >
+              <v-icon>
                 mdi-menu
               </v-icon>
             </v-btn>
@@ -96,7 +93,7 @@
                   depressed
                   @click="scrollTo('top')"
                 >
-                  main
+                  Какая музыка есть
                 </v-btn>
               </NuxtLink>
             </v-list-item>
@@ -106,9 +103,8 @@
                 <v-btn
                   class="common-btn nav-btn"
                   depressed
-                  @click="scrollTo('moto')"
                 >
-                  motorcycle
+                  Что мы предлагаем?
                 </v-btn>
               </NuxtLink>
             </v-list-item>
@@ -118,9 +114,8 @@
                 <v-btn
                   class="common-btn nav-btn"
                   depressed
-                  @click="scrollTo('us')"
                 >
-                  our us
+                  Наши клиенты
                 </v-btn>
               </NuxtLink>
             </v-list-item>
@@ -130,9 +125,8 @@
                 <v-btn
                   class="common-btn nav-btn"
                   depressed
-                  @click="scrollTo('feedback')"
                 >
-                  client
+                  Как это работает?
                 </v-btn>
               </NuxtLink>
             </v-list-item>
@@ -142,68 +136,25 @@
                 <v-btn
                   class="common-btn nav-btn"
                   depressed
-                  @click="scrollTo('write')"
                 >
-                  write
+                  Вход
                 </v-btn>
               </NuxtLink>
             </v-list-item>
 
-            <v-list-item class="iconed">
-              <a
-                href="https://wa.me/6281337413132"
-                target="_blank"
-              >
+            <v-list-item>
+              <NuxtLink :to="{ path: '/' }">
                 <v-btn
-                  class="common-btn nav-btn icon-btn"
+                  class="common-btn action-btn"
                   depressed
                 >
-                  <img src="../static/images/whatsapp.png">
+                  Попробовать Демо
                 </v-btn>
-              </a>
-            </v-list-item>
-
-            <v-list-item class="iconed">
-              <a href="tel:+6281337413132">
-                <v-btn
-                  class="common-btn nav-btn icon-btn"
-                  depressed
-                >
-                  <img src="../static/images/phone.svg">
-                </v-btn>
-              </a>
-            </v-list-item>
-
-            <v-list-item class="iconed">
-              <a
-                href="https://telegram.me/alex_from_bali"
-                target="_blank"
-              >
-                <v-btn
-                  class="common-btn nav-btn icon-btn"
-                  depressed
-                >
-                  <img src="../static/images/telegram.svg">
-                </v-btn>
-              </a>
-            </v-list-item>
-
-            <v-list-item class="iconed">
-              <a
-                href="https://www.instagram.com/paxton_garage/"
-                target="_blank"
-              >
-                <v-btn
-                  class="common-btn nav-btn icon-btn"
-                  depressed
-                >
-                  <img src="../static/images/instagram.svg">
-                </v-btn>
-              </a>
+              </NuxtLink>
             </v-list-item>
           </v-list>
         </v-menu>
-      </nav> -->
+      </nav>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -376,6 +327,10 @@ export default {
     }
   }
 
+  a {
+    text-decoration: none !important;
+  }
+
   .v-main .container {
     max-width: 100% !important;
     width: 100% !important;
@@ -488,6 +443,10 @@ export default {
 
   .nav-small {
     display: none;
+
+    a {
+      text-decoration: none;
+    }
   }
 
   .nav-big {
@@ -504,7 +463,8 @@ export default {
       display: block;
     }
 
-    .nav-big {
+    .nav-big,
+    .header-actions {
       display: none;
     }
 

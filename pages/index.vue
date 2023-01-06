@@ -504,7 +504,7 @@ export default {
         font-size: 24px;
         line-height: 30px;
         padding-left: 4px;
-        margin: 20px 0;
+        margin: 30px 0 40px 0;
       }
     }
     .hero-music {

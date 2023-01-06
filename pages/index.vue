@@ -19,7 +19,7 @@
                 Попробовать Демо
               </v-btn>
               <v-btn
-                class="common-btn link-btn"
+                class="common-btn link-btn lk-btn"
                 depressed
               >
                 Войти в личный кабинет
@@ -485,8 +485,26 @@ export default {
   }
 
   @media screen and (max-width: 1263px) {
+    .lk-btn {
+      display: none;
+    }
+
     .hero .main-text {
       padding-top: 0px;
+
+      h1 {
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 58px;
+        text-transform: capitalize;
+      }
+
+      p {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 30px;
+        padding-left: 4px;
+      }
     }
     .hero-music {
       margin-top: 100px;

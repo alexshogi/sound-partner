@@ -5,7 +5,7 @@
         <v-row>
           <v-col
             cols="12"
-            class="pt-10"
+            class="main-text"
             lg="7"
             xs="12"
           >
@@ -288,6 +288,10 @@ export default {
     align-items: center;
     position: relative;
 
+    .main-text {
+      padding-top: 40px;
+    }
+
     h1 {
       font-weight: 700;
       font-size: 62px;
@@ -481,6 +485,9 @@ export default {
   }
 
   @media screen and (max-width: 1263px) {
+    .hero .main-text {
+      padding-top: 0px;
+    }
     .hero-music {
       margin-top: 100px;
 

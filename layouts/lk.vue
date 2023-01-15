@@ -218,7 +218,7 @@ export default {
         { title: 'Обзор', icon: 'mdi-view-dashboard', route: 'review' },
         { title: 'Альбомы', icon: 'mdi-folder-play', route: 'albums' },
         { title: 'Артисты', icon: 'mdi-account-music', route: 'artists' },
-        { title: 'Понравилось', icon: 'mdi-heart', route: 'liked' },
+        { title: 'Понравилось', icon: 'mdi-heart', route: 'favourite' },
       ],
       items2: [
         { title: 'Мои ресторан(-ы)', icon: 'mdi-home-group', route: 'myrestaurants' },

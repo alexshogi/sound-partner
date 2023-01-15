@@ -1,5 +1,8 @@
 <template>
-  <section class="track">
+  <section
+    class="track"
+    :class="{ 'full-width': wide }"
+  >
     <h3>{{ track.artist }} — {{ track.title }}</h3>
     <div class="params">
       <v-btn
@@ -44,6 +47,10 @@
       file: {
         type: String,
         default: null
+      },
+      wide: {
+        type: Boolean,
+        default: false
       },
       track: {
         type: Object,
@@ -95,10 +102,7 @@
       }
     },
     watch: {
-      title: function (title) {
-        console.log('Title changed to')
-        console.log(title)
-
+      title: function () {
         this.audio = this.$refs.player;
         this.init();
 
@@ -110,6 +114,10 @@
     mounted () {
       this.audio = this.$refs.player;
       this.init();
+
+      setTimeout(() => {
+        this.audio.play().then(() => this.playing = true)
+      }, 50);
     },
     beforeUnmount () {
       this.audio.removeEventListener('timeupdate', this._handlePlayingUI)
@@ -182,6 +190,10 @@
     display: flex;
     flex-direction: column;
     padding: 16px;
+
+    &.full-width {
+      width: 100%;
+    }
 
     h3 {
       font-weight: 300;

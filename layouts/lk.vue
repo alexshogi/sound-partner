@@ -98,69 +98,67 @@
       <v-main style="padding-top: 0;">
         <v-container>
           <Nuxt />
-          <v-navigation-drawer
-            v-model="sideDrawer"
-            right
-            absolute
-            expand-on-hover
-            hide-overlay
-            width="400"
-          >
-            <v-list class="music-player">
-              <v-list-item>
-                <v-icon class="main-icon">
-                  mdi-playlist-music
-                </v-icon>
-                <v-list-item-title>
-                  <h2>Следующая песня</h2>
-                </v-list-item-title>
-              </v-list-item>
-
-              <v-list-item
-                v-for="(track, index) in tracks"
-                :key="track.title + index"
-                class="ml-12"
-              >
-                <v-list-item-avatar>
-                  <v-img
-                    min-height="56"
-                    min-width="56"
-                    max-height="56"
-                    max-width="56"
-                    :src="track.avatar"
-                    style="background: #D9D9D9; border-radius: 5px;"
-                  />
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title>{{ track.title }}</v-list-item-title>
-                  <v-list-item-subtitle>{{ track.artist }}</v-list-item-subtitle>
-                </v-list-item-content>
-                <v-list-item-action>
-                  <v-btn icon>
-                    <v-icon color="grey lighten-1">
-                      mdi-dots-vertical
-                    </v-icon>
-                  </v-btn>
-                </v-list-item-action>
-              </v-list-item>
-
-              <v-list-item class="ml-12 mt-4">
-                <v-list-item-title>
-                  <h2>Сейчас играет</h2>
-                </v-list-item-title>
-              </v-list-item>
-
-              <v-list-item class="ml-12 mt-4">
-                <TrackSingle
-                  class="mb-5"
-                  :track="currentTrack"
-                  :title="currentTrack.title"
-                />
-              </v-list-item>
-            </v-list>
-          </v-navigation-drawer>
         </v-container>
       </v-main>
+
+      <v-navigation-drawer
+        right
+        permanent
+        width="400"
+      >
+        <v-list class="music-player">
+          <v-list-item class="mb-4">
+            <v-icon class="main-icon">
+              mdi-playlist-music
+            </v-icon>
+            <v-list-item-title>
+              <h2>Следующая песня</h2>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item
+            v-for="(track, index) in tracks"
+            :key="track.title + index"
+          >
+            <v-list-item-avatar>
+              <v-img
+                min-height="56"
+                min-width="56"
+                max-height="56"
+                max-width="56"
+                :src="track.avatar"
+                style="background: #D9D9D9; border-radius: 5px;"
+              />
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title>{{ track.title }}</v-list-item-title>
+              <v-list-item-subtitle>{{ track.artist }}</v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action>
+              <v-btn icon>
+                <v-icon color="grey lighten-1">
+                  mdi-dots-vertical
+                </v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+
+          <v-list-item class="mt-4 mb-4">
+            <v-list-item-title>
+              <h2>Сейчас играет</h2>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item class="mt-4">
+            <TrackSingle
+              class="mb-5"
+              wide
+              :track="currentTrack"
+              :title="currentTrack.title"
+            />
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
     </div>
   </v-app>
 </template>
@@ -175,7 +173,6 @@ export default {
   },
   data () {
     return {
-      sideDrawer: true,
       currentTrack: {
         artist: 'DJ Shadow, Mos Def',
         title: 'Six Days',

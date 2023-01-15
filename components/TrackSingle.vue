@@ -1,6 +1,6 @@
 <template>
   <section class="track">
-    <h3>DJ Shadow feat. Mos Def — Six Days</h3>
+    <h3>{{ track.artist }} — {{ track.title }}</h3>
     <div class="params">
       <v-btn
         class="control-btn"
@@ -27,7 +27,7 @@
       <audio
         id="player"
         ref="player"
-        :src="file"
+        :src="source"
         @ended="ended"
         @canplay="canPlay"
       />
@@ -44,6 +44,14 @@
       file: {
         type: String,
         default: null
+      },
+      track: {
+        type: Object,
+        required: true
+      },
+      title: {
+        type: String,
+        required: true
       },
       ended: {
         type: Function,
@@ -81,6 +89,22 @@
     computed: {
       duration: function () {
         return this.audio ? formatTime(this.totalDuration) : ''
+      },
+      source () {
+        return this.track.source;
+      }
+    },
+    watch: {
+      title: function (title) {
+        console.log('Title changed to')
+        console.log(title)
+
+        this.audio = this.$refs.player;
+        this.init();
+
+        setTimeout(() => {
+          this.audio.play().then(() => this.playing = true)
+        }, 50);
       },
     },
     mounted () {

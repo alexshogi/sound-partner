@@ -119,12 +119,14 @@
                     <v-icon
                       v-if="item.liked"
                       color="#2256F6"
+                      @click="item.liked = !item.liked"
                     >
                       mdi-heart
                     </v-icon>
                     <v-icon
                       v-else
                       color="#2256F6"
+                      @click="item.liked = !item.liked"
                     >
                       mdi-heart-outline
                     </v-icon>
@@ -151,7 +153,10 @@
                   <td width="10">
                     {{ '0' + (index + 1) }}
                   </td>
-                  <td width="50">
+                  <td
+                    width="50"
+                    style="position: relative;"
+                  >
                     <v-img
                       min-height="50"
                       min-width="50"
@@ -160,6 +165,12 @@
                       :src="item.avatar"
                       style="background: #D9D9D9; border-radius: 5px;"
                     />
+                    <div
+                      class="avatar-hover"
+                      @click="play(item)"
+                    >
+                      <v-icon>mdi-play</v-icon>
+                    </div>
                   </td>
                   <td width="200">
                     {{ item.title }}
@@ -175,12 +186,14 @@
                     <v-icon
                       v-if="item.liked"
                       color="#2256F6"
+                      @click="item.liked = !item.liked"
                     >
                       mdi-heart
                     </v-icon>
                     <v-icon
                       v-else
                       color="#2256F6"
+                      @click="item.liked = !item.liked"
                     >
                       mdi-heart-outline
                     </v-icon>

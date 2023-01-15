@@ -153,7 +153,8 @@
               <v-list-item class="ml-12 mt-4">
                 <TrackSingle
                   class="mb-5"
-                  file="../audio/six-days.mp3"
+                  :track="currentTrack"
+                  :title="currentTrack.title"
                 />
               </v-list-item>
             </v-list>
@@ -258,6 +259,8 @@ export default {
     changeTrack (track) {
       console.log('** changeTrack')
       console.log(track)
+
+      this.currentTrack = track;
     }
   }
 }

@@ -4,7 +4,26 @@
     <v-app-bar
       fixed
       app
-    />
+    >
+      <div class="logo">
+        <NuxtLink :to="{ path: '/' }">
+          <img
+            src="../static/images/logo-horizontal.png"
+            alt="SOUND PARTNER"
+            @click="scrollTo('top')"
+          >
+        </NuxtLink>
+      </div>
+
+      <v-text-field
+        placeholder="Поиск музыки, альбома, артиста или ресторана"
+        solo
+        dense
+        hide-details
+        class="search-field"
+      />
+    </v-app-bar>
+
     <div
       class="d-flex"
       style="padding-top: 100px;"
@@ -108,9 +127,6 @@
       >
         <v-list class="music-player">
           <v-list-item class="mb-4">
-            <v-icon class="main-icon">
-              mdi-playlist-music
-            </v-icon>
             <v-list-item-title>
               <h2>Следующая песня</h2>
             </v-list-item-title>
@@ -278,6 +294,24 @@ export default {
     margin: 0 auto !important;
   }
 
+  .v-toolbar {
+    display: flex;
+    justify-content: center;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+  }
+
+  .v-toolbar__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    width: 100%;
+    max-width: unset;
+    height: 100% !important;
+  }
+
   @media screen and (max-width: 900px) {
     .v-toolbar,
     .v-toolbar__content {
@@ -305,6 +339,15 @@ export default {
     max-width: 1470px;
     margin: 0 auto;
     padding: 0 15px;
+  }
+
+  .search-field > .v-input__control > .v-input__slot {
+    box-shadow: none !important;
+    background: #F6F6F6 !important;
+    border-right: 2px solid #2256F6;
+    border-radius: 10px;
+    max-width: 40%;
+    margin-left: 115px;
   }
 
   .nav-heading {

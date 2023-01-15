@@ -236,7 +236,7 @@ export default {
   name: 'DefaultLayout',
   data () {
     return {
-      clipped: false
+      clipped: false,
     }
   },
   methods: {

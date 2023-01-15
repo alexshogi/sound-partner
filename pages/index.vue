@@ -37,19 +37,23 @@
             <div class="hero-music">
               <TrackSingle
                 class="mb-5"
-                file="../audio/six-days.mp3"
+                :track="track"
+                :title="track.title"
               />
               <TrackSingle
                 class="mb-5"
-                file="../audio/six-days.mp3"
+                :track="track"
+                :title="track.title"
               />
               <TrackSingle
                 class="mb-5"
-                file="../audio/six-days.mp3"
+                :track="track"
+                :title="track.title"
               />
               <TrackSingle
                 class="mb-5"
-                file="../audio/six-days.mp3"
+                :track="track"
+                :title="track.title"
               />
             </div>
             <div class="d-flex justify-center">
@@ -274,7 +278,17 @@ export default {
   },
   data: () => {
     return {
-      loading: false
+      loading: false,
+      track: {
+        artist: 'Alan Walker',
+        title: 'The Drum',
+        avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
+        plays: '8 796 542',
+        duration: '3:09',
+        source: '../audio/the-drum.mp3',
+        number: '01',
+        liked: false
+      },
     }
   },
   mounted () {},

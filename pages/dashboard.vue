@@ -86,7 +86,10 @@
                   <td width="10">
                     {{ '0' + (index + 1) }}
                   </td>
-                  <td width="50">
+                  <td
+                    width="50"
+                    style="position: relative;"
+                  >
                     <v-img
                       min-height="50"
                       min-width="50"
@@ -95,6 +98,12 @@
                       :src="item.avatar"
                       style="background: #D9D9D9; border-radius: 5px;"
                     />
+                    <div
+                      class="avatar-hover"
+                      @click="play(item)"
+                    >
+                      <v-icon>mdi-play</v-icon>
+                    </div>
                   </td>
                   <td width="200">
                     {{ item.title }}
@@ -198,6 +207,7 @@ export default {
           avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
           plays: '8 096 542',
           duration: '3:58',
+          source: '../audio/millions.mp3',
           number: '01',
           liked: true
         },
@@ -207,15 +217,17 @@ export default {
           avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
           plays: '8 096 542',
           duration: '3:58',
+          source: '../audio/millions.mp3',
           number: '02',
           liked: true
         },
         {
-          artist: 'Always Never',
-          title: 'Millions',
-          avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
-          plays: '8 096 542',
-          duration: '3:58',
+          artist: 'DJ Shadow, Mos Def',
+          title: 'Six Days',
+          avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy15ez24PqDSOEn7zfVZTAz-U22aDiQ5-2A&usqp=CAU',
+          plays: '4 300 124',
+          duration: '3:53',
+          source: '../audio/six-days.mp3',
           number: '03',
           liked: true
         },
@@ -225,6 +237,7 @@ export default {
           avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
           plays: '8 096 542',
           duration: '3:58',
+          source: '../audio/millions.mp3',
           number: '04',
           liked: true
         },
@@ -234,6 +247,7 @@ export default {
           avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
           plays: '8 096 542',
           duration: '3:58',
+          source: '../audio/millions.mp3',
           number: '05',
           liked: true
         },
@@ -245,7 +259,7 @@ export default {
           avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
           plays: '8 796 542',
           duration: '3:09',
-          source: '../../static/audio/the-drum.mp3',
+          source: '../audio/the-drum.mp3',
           number: '01',
           liked: false
         },
@@ -255,7 +269,7 @@ export default {
           avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
           plays: '8 796 542',
           duration: '3:09',
-          source: '../../static/audio/the-drum.mp3',
+          source: '../audio/the-drum.mp3',
           number: '02',
           liked: false
         },
@@ -265,7 +279,7 @@ export default {
           avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
           plays: '8 796 542',
           duration: '3:09',
-          source: '../../static/audio/the-drum.mp3',
+          source: '../audio/the-drum.mp3',
           number: '03',
           liked: false
         },
@@ -275,7 +289,7 @@ export default {
           avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
           plays: '8 796 542',
           duration: '3:09',
-          source: '../../static/audio/the-drum.mp3',
+          source: '../audio/the-drum.mp3',
           number: '04',
           liked: false
         },
@@ -285,23 +299,55 @@ export default {
           avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
           plays: '8 796 542',
           duration: '3:09',
-          source: '../../static/audio/the-drum.mp3',
+          source: '../audio/the-drum.mp3',
           number: '05',
           liked: false
         },
       ],
     }
   },
+  methods: {
+    play (item) {
+      console.log('** play')
+      console.log(item)
+
+      this.$nuxt.$emit('change-song', item)
+    }
+  }
 }
 </script>
 
 <style>
-  .v-data-table > .v-data-table__wrapper > table {
+  /* .v-data-table > .v-data-table__wrapper > table {
     border-spacing: 0 10px;
-  }
+  } */
 
   .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
     padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .avatar-hover {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 32px);
+    height: calc(100% - 20px);
+    position: absolute;
+    border-radius: 5px;
+    cursor: pointer;
+    top: 10px;
+    left: 16px;
+    background: linear-gradient(120deg, rgba(24,229,237,0.45) 0%, rgba(156,29,223,0.45) 32%, rgba(46,193,236,0.45) 100%);
+  }
+
+  .avatar-hover i.v-icon {
+    color: #FFFFFF;
+    font-size: 34px;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > tbody > tr:hover > td > .avatar-hover {
+    display: flex;
   }
 </style>
 

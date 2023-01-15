@@ -103,6 +103,7 @@
             right
             absolute
             expand-on-hover
+            hide-overlay
             width="400"
           >
             <v-list class="music-player">
@@ -174,6 +175,15 @@ export default {
   data () {
     return {
       sideDrawer: true,
+      currentTrack: {
+        artist: 'DJ Shadow, Mos Def',
+        title: 'Six Days',
+        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy15ez24PqDSOEn7zfVZTAz-U22aDiQ5-2A&usqp=CAU',
+        plays: '4 300 124',
+        duration: '3:53',
+        source: '../audio/six-days.mp3',
+        liked: true
+      },
       items1: [
         { title: 'Главная', icon: 'mdi-home', route: 'dashboard' },
         { title: 'Обзор', icon: 'mdi-view-dashboard', route: 'review' },
@@ -239,6 +249,17 @@ export default {
       ]
     }
   },
+  created() {
+    this.$nuxt.$on('change-song', (track) => {
+      this.changeTrack(track);
+    })
+  },
+  methods: {
+    changeTrack (track) {
+      console.log('** changeTrack')
+      console.log(track)
+    }
+  }
 }
 </script>
 

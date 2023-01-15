@@ -323,7 +323,7 @@ export default {
     align-items: center;
     padding: 8px 16px;
     width: 100%;
-    max-width: unset;
+    max-width: 100%;
     height: 100% !important;
   }
 

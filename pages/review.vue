@@ -3,7 +3,7 @@
   <main>
     <div class="content-container">
       <h2 class="mb-4">
-        Ваши заведения
+        Плейлисты для ваших заведений
       </h2>
 
       <v-row>
@@ -11,62 +11,66 @@
           cols="12"
           lg="4"
         >
-          <div class="rest-card">
+          <div class="rest-playlist-card">
             <div>
-              <h4 class="mb-2">
-                Ресторан “Небо”
-              </h4>
-              <h4>Сейчас играет “Millions Always Never”</h4>
-            </div>
-            <div class="d-flex justify-end">
-              <v-btn
-                class="simple-btn"
-                depressed
-              >
-                Подробнее
-              </v-btn>
+              <h4>Плейлист для “Ресторана”</h4>
             </div>
           </div>
         </v-col>
+
         <v-col
           cols="12"
           lg="4"
         >
-          <div class="rest-card">
+          <div class="rest-playlist-card">
             <div>
-              <h4 class="mb-2">
-                Ресторан “Весна”
-              </h4>
-              <h4>Сейчас играет “Millions Always Never”</h4>
-            </div>
-            <div class="d-flex justify-end">
-              <v-btn
-                class="simple-btn"
-                depressed
-              >
-                Подробнее
-              </v-btn>
+              <h4>Плейлист для “Ресторана”</h4>
             </div>
           </div>
         </v-col>
+
         <v-col
           cols="12"
           lg="4"
         >
-          <div class="rest-card">
+          <div class="rest-playlist-card">
             <div>
-              <h4 class="mb-2">
-                Ресторан “Под дубом”
-              </h4>
-              <h4>Сейчас играет “Millions Always Never”</h4>
+              <h4>Плейлист для “Ресторана”</h4>
             </div>
-            <div class="d-flex justify-end">
-              <v-btn
-                class="simple-btn"
-                depressed
-              >
-                Подробнее
-              </v-btn>
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col
+          cols="12"
+          lg="4"
+        >
+          <div class="rest-playlist-card">
+            <div>
+              <h4>Плейлист для “Ресторана”</h4>
+            </div>
+          </div>
+        </v-col>
+
+        <v-col
+          cols="12"
+          lg="4"
+        >
+          <div class="rest-playlist-card">
+            <div>
+              <h4>Плейлист для “Ресторана”</h4>
+            </div>
+          </div>
+        </v-col>
+
+        <v-col
+          cols="12"
+          lg="4"
+        >
+          <div class="rest-playlist-card">
+            <div>
+              <h4>Плейлист для “Ресторана”</h4>
             </div>
           </div>
         </v-col>
@@ -404,20 +408,28 @@ export default {
     text-transform: none;
   }
 
-  .rest-card {
+  .rest-playlist-card {
     height: 222px;
-    background: #2256F6;
+    background: #8b5017;
     border-radius: 10px;
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
+    background-image: url('https://www.spoon-restaurant.com/wp-content/uploads/2022/06/Spoon_cLe_Bonbon-1-scaled.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
 
     h4 {
       font-weight: 600;
       font-size: 18px;
       line-height: 22px;
       color: #FFFFFF;
+      padding: 16px;
+      backdrop-filter: blur(5px);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
     }
   }
 </style>

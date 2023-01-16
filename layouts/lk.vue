@@ -184,6 +184,7 @@
             <TrackSingle
               class="mb-5"
               wide
+              autoplay
               :track="currentTrack"
               :title="currentTrack.title"
             />

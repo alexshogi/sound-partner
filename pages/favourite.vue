@@ -224,8 +224,8 @@ export default {
   } */
 
   .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
   }
 
   .avatar-hover {

@@ -56,6 +56,10 @@
         type: Object,
         required: true
       },
+      autoplay: {
+        type: Boolean,
+        default: false
+      },
       title: {
         type: String,
         required: true
@@ -106,18 +110,22 @@
         this.audio = this.$refs.player;
         this.init();
 
-        setTimeout(() => {
-          this.audio.play().then(() => this.playing = true)
-        }, 50);
+        if (this.autoplay) {
+          setTimeout(() => {
+            this.audio.play().then(() => this.playing = true)
+          }, 50);
+        }
       },
     },
     mounted () {
       this.audio = this.$refs.player;
       this.init();
 
-      setTimeout(() => {
-        this.audio.play().then(() => this.playing = true)
-      }, 50);
+      if (this.autoplay) {
+        setTimeout(() => {
+          this.audio.play().then(() => this.playing = true)
+        }, 50);
+      }
     },
     beforeUnmount () {
       this.audio.removeEventListener('timeupdate', this._handlePlayingUI)

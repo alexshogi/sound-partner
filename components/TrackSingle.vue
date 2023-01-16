@@ -1,7 +1,7 @@
 <template>
   <section
     class="track"
-    :class="{ 'full-width': wide }"
+    :class="{ 'full-width': wide, 'flat': wide }"
   >
     <h3>{{ track.artist }} — {{ track.title }}</h3>
     <div class="params">
@@ -49,6 +49,10 @@
         default: null
       },
       wide: {
+        type: Boolean,
+        default: false
+      },
+      flat: {
         type: Boolean,
         default: false
       },
@@ -201,6 +205,10 @@
 
     &.full-width {
       width: 100%;
+    }
+
+    &.flat {
+      box-shadow: none;
     }
 
     h3 {

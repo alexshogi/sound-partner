@@ -139,6 +139,7 @@
       </v-main>
 
       <v-navigation-drawer
+        v-if="showSidebar"
         right
         permanent
         width="400"
@@ -208,6 +209,7 @@ export default {
   },
   data () {
     return {
+      showSidebar: true,
       currentTrack: {
         artist: 'DJ Shadow, Mos Def',
         title: 'Six Days',
@@ -231,7 +233,7 @@ export default {
       items3: [
         { title: 'Аккаунт', icon: 'mdi-cog', route: '/account' },
         { title: 'Загрузить', icon: 'mdi-upload', route: '/upload' },
-        { title: 'Выход', icon: 'mdi-logout-variant', route: '/' },
+        // { title: 'Выход', icon: 'mdi-logout-variant', route: '/' },
       ],
       tracks: [
         {
@@ -286,6 +288,14 @@ export default {
     this.$nuxt.$on('change-song', (track) => {
       this.changeTrack(track);
     })
+
+    this.$nuxt.$on('hide-sidebar', () => {
+      this.showSidebar = false;
+    })
+
+    this.$nuxt.$on('show-sidebar', () => {
+      this.showSidebar = true;
+    })
   },
   methods: {
     changeTrack (track) {
@@ -328,8 +338,8 @@ export default {
     height: 100% !important;
   }
 
-  .nuxt-link-exact-active .v-list-item__icon i,
-  .nuxt-link-exact-active .v-list-item__content .v-list-item__title {
+  .nuxt-link-active .v-list-item__icon i,
+  .nuxt-link-active .v-list-item__content .v-list-item__title {
     transition: all 0.2s;
     color: #2256F6 !important;
   }

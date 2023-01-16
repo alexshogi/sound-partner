@@ -80,6 +80,8 @@
             :key="item.title"
             class="nav-item"
             link
+            active-class="highlighted"
+            :class="item.route === $route.path ? 'highlighted' : ''"
           >
             <NuxtLink
               :to="{ path: item.route }"
@@ -229,7 +231,7 @@ export default {
       items3: [
         { title: 'Аккаунт', icon: 'mdi-cog', route: '/account' },
         { title: 'Загрузить', icon: 'mdi-upload', route: '/upload' },
-        { title: 'Выход', icon: 'mdi-logout-variant' },
+        { title: 'Выход', icon: 'mdi-logout-variant', route: '/' },
       ],
       tracks: [
         {
@@ -324,6 +326,12 @@ export default {
     width: 100% ;
     max-width: 100% ;
     height: 100% !important;
+  }
+
+  .nuxt-link-exact-active .v-list-item__icon i,
+  .nuxt-link-exact-active .v-list-item__content .v-list-item__title {
+    transition: all 0.2s;
+    color: #2256F6 !important;
   }
 
   @media screen and (max-width: 900px) {

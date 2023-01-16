@@ -4,6 +4,7 @@
     <v-app-bar
       fixed
       app
+      class="app-header"
     >
       <div class="logo">
         <NuxtLink :to="{ path: '/' }">
@@ -317,14 +318,14 @@ export default {
     background-color: #ffffff !important;
   }
 
-  .v-toolbar__content {
+  .app-header .v-toolbar__content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 8px 16px;
-    width: 100%;
-    max-width: 100%;
+    width: 100% ;
+    max-width: 100% ;
     height: 100% !important;
   }
 

@@ -4,6 +4,7 @@
       id="top"
       fixed
       app
+      class="landing-header"
     >
       <div class="logo">
         <NuxtLink :to="{ path: '/' }">
@@ -344,7 +345,7 @@ export default {
     background-color: #ffffff !important;
   }
 
-  .v-toolbar__content {
+  .landing-header .v-toolbar__content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

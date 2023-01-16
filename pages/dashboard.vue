@@ -342,20 +342,13 @@ export default {
   },
   methods: {
     play (item) {
-      console.log('** play')
-      console.log(item)
-
-      this.$nuxt.$emit('change-song', item)
+      this.$nuxt.$emit('change-song', item);
     }
   }
 }
 </script>
 
 <style>
-  /* .v-data-table > .v-data-table__wrapper > table {
-    border-spacing: 0 10px;
-  } */
-
   .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
     padding-bottom: 10px !important;
     padding-top: 10px !important;

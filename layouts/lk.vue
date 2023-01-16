@@ -216,19 +216,19 @@ export default {
         liked: true
       },
       items1: [
-        { title: 'Главная', icon: 'mdi-home', route: 'dashboard' },
-        { title: 'Обзор', icon: 'mdi-view-dashboard', route: 'review' },
-        { title: 'Альбомы', icon: 'mdi-folder-play', route: 'albums' },
-        { title: 'Артисты', icon: 'mdi-account-music', route: 'artists' },
-        { title: 'Понравилось', icon: 'mdi-heart', route: 'favourite' },
+        { title: 'Главная', icon: 'mdi-home', route: '/dashboard' },
+        { title: 'Обзор', icon: 'mdi-view-dashboard', route: '/review' },
+        { title: 'Альбомы', icon: 'mdi-folder-play', route: '/albums' },
+        { title: 'Артисты', icon: 'mdi-account-music', route: '/artists' },
+        { title: 'Понравилось', icon: 'mdi-heart', route: '/favourite' },
       ],
       items2: [
-        { title: 'Мои ресторан(-ы)', icon: 'mdi-home-group', route: 'myrestaurants' },
-        { title: 'Рестораны', icon: 'mdi-account-supervisor', route: 'restaurants' },
+        { title: 'Мои ресторан(-ы)', icon: 'mdi-home-group', route: '/myrestaurants' },
+        { title: 'Рестораны', icon: 'mdi-account-supervisor', route: '/restaurants' },
       ],
       items3: [
-        { title: 'Аккаунт', icon: 'mdi-cog', route: 'account' },
-        { title: 'Загрузить', icon: 'mdi-upload', route: 'upload' },
+        { title: 'Аккаунт', icon: 'mdi-cog', route: '/account' },
+        { title: 'Загрузить', icon: 'mdi-upload', route: '/upload' },
         { title: 'Выход', icon: 'mdi-logout-variant' },
       ],
       tracks: [
@@ -287,9 +287,6 @@ export default {
   },
   methods: {
     changeTrack (track) {
-      console.log('** changeTrack')
-      console.log(track)
-
       this.currentTrack = track;
     }
   }

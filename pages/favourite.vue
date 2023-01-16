@@ -3,7 +3,15 @@
   <main>
     <div class="content-container">
       <v-row class="mb-4">
-        555
+        <v-col
+          cols="12"
+        >
+          <div class="rest-playlist-card">
+            <div>
+              <h4>Плейлист для “Ресторана”</h4>
+            </div>
+          </div>
+        </v-col>
       </v-row>
 
       <div class="d-flex justify-space-between align-center mt-12 mb-4">
@@ -12,17 +20,21 @@
         </h2>
         <div>
           <v-btn
-            color="#2256F6"
+            :color="showLiked ? '#2256F6' : '#D9E2FF'"
             text
             style="font-weight: 600; font-size: 18px; line-height: 22px; text-transform: none; letter-spacing: normal;"
+            @click="showLiked = true"
           >
             Понравились
           </v-btn>
 
+          <span style="font-weight: 600; font-size: 18px; line-height: 22px; text-transform: none; letter-spacing: normal; color: #2256F6;">|</span>
+
           <v-btn
-            color="#2256F6"
+            :color="!showLiked ? '#2256F6' : '#D9E2FF'"
             text
             style="font-weight: 600; font-size: 18px; line-height: 22px; text-transform: none; letter-spacing: normal;"
+            @click="showLiked = false"
           >
             Не понравились
           </v-btn>
@@ -35,8 +47,8 @@
             <template #default>
               <tbody>
                 <tr
-                  v-for="(item, index) in [ ...items, ...recommendedItems]"
-                  :key="item.name + index"
+                  v-for="(item, index) in showLiked ? liked : notLiked"
+                  :key="item.name + index + item.number"
                 >
                   <td width="10">
                     {{ '0' + (index + 1) }}
@@ -101,6 +113,7 @@ export default {
   layout: 'lk',
   data () {
     return {
+      showLiked: true,
       items: [
         {
           artist: 'Always Never',
@@ -205,6 +218,18 @@ export default {
           liked: false
         },
       ],
+    }
+  },
+  computed: {
+    liked () {
+      const allTracks = [...this.items, ...this.recommendedItems];
+
+      return allTracks.filter((t) => t.liked);
+    },
+    notLiked () {
+      const allTracks = [...this.items, ...this.recommendedItems];
+
+      return allTracks.filter((t) => !t.liked);
     }
   },
   methods: {

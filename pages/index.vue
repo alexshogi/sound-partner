@@ -285,7 +285,7 @@ export default {
         avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
         plays: '8 796 542',
         duration: '3:09',
-        source: '../audio/the-drum.mp3',
+        // source: '../audio/the-drum.mp3',
         number: '01',
         liked: false
       },

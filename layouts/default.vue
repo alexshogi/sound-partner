@@ -66,12 +66,14 @@
           Вход
         </v-btn>
 
-        <v-btn
-          class="common-btn action-btn"
-          depressed
-        >
-          Попробовать Демо
-        </v-btn>
+        <NuxtLink :to="{ path: '/dashboard' }">
+          <v-btn
+            class="common-btn action-btn"
+            depressed
+          >
+            Попробовать Демо
+          </v-btn>
+        </NuxtLink>
       </div>
 
       <nav class="nav-small">

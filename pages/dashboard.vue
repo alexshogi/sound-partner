@@ -343,7 +343,7 @@ export default {
   mounted () {
     // http://95.216.153.85/
 
-    this.$axios.get('https://95.216.153.85/api/stations')
+    this.$axios.get('http://95.216.153.85/api/stations')
       .then((result) => {
         console.log(result);
       })
@@ -351,7 +351,7 @@ export default {
         console.error(err);
       });
 
-    this.$axios.get('https://95.216.153.85/api/nowplaying/1')
+    this.$axios.get('http://95.216.153.85/api/nowplaying/1')
       .then((result) => {
         console.log('res');
         console.log(result);

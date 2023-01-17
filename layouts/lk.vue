@@ -211,14 +211,11 @@ export default {
     return {
       showSidebar: true,
       currentTrack: {
-        artist: 'DJ Shadow, Mos Def',
-        title: 'Six Days',
-        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy15ez24PqDSOEn7zfVZTAz-U22aDiQ5-2A&usqp=CAU',
-        plays: '4 300 124',
-        duration: '3:53',
-        // source: '../audio/six-days.mp3',
-        source: 'http://95.216.153.85/listen/rest1/radio.mp3',
-        liked: true
+        artist: '',
+        title: '',
+        avatar: '',
+        plays: '',
+        duration: ''
       },
       items1: [
         { title: 'Главная', icon: 'mdi-home', route: '/dashboard' },
@@ -288,6 +285,7 @@ export default {
   created() {
     this.$nuxt.$on('change-song', (track) => {
       this.changeTrack(track);
+      console.log(track)
     })
 
     this.$nuxt.$on('hide-sidebar', () => {

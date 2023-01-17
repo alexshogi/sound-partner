@@ -340,6 +340,33 @@ export default {
       ],
     }
   },
+  mounted () {
+    // http://95.216.153.85/
+
+    this.$axios.get('http://95.216.153.85/api/stations')
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    this.$axios.get('http://95.216.153.85/api/nowplaying/1')
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    this.$axios.get('http://95.216.153.85/api/station/1/history')
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   methods: {
     play (item) {
       this.$nuxt.$emit('change-song', item);

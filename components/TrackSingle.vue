@@ -39,6 +39,8 @@
 </template>
 
 <script>
+  import { Howl, Howler } from 'howler'
+
   const formatTime = second => new Date(second * 1000).toISOString().substr(14, 5);
 
   export default {
@@ -103,7 +105,7 @@
     },
     computed: {
       duration: function () {
-        return this.audio ? formatTime(this.totalDuration) : ''
+        return this.audio && this.totalDuration ? formatTime(this.totalDuration) : ''
       },
       source () {
         return this.track.source;
@@ -113,6 +115,9 @@
       title: function () {
         this.audio = this.$refs.player;
         this.init();
+
+        console.log('*****')
+        console.log(this.track)
 
         if (this.autoplay) {
           setTimeout(() => {
@@ -181,13 +186,28 @@
         this.paused = this.playing = false;
       },
       init: function () {
-        this.audio.addEventListener('timeupdate', this._handlePlayingUI);
-        this.audio.addEventListener('loadeddata', this._handleLoaded);
-        this.audio.addEventListener('ended', this._handleEnded);
-        this.playing = false;
+        // this.audio.addEventListener('timeupdate', this._handlePlayingUI);
+        // this.audio.addEventListener('loadeddata', this._handleLoaded);
+        // this.audio.addEventListener('ended', this._handleEnded);
+        // this.playing = false;
+
+        // setTimeout(() => {
+        //   this.playing = false;
+        // }, 10);
+
+        console.log(this.track);
+
+        const sound = new Howl({
+          src: [this.track.source],
+          html5: true
+        });
+
+        // sound.play();
+
         setTimeout(() => {
-          this.playing = false;
-        }, 10);
+          this.playing = true;
+          sound.play();
+        }, 3000);
       },
     }
   }

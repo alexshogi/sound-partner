@@ -216,7 +216,8 @@ export default {
         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy15ez24PqDSOEn7zfVZTAz-U22aDiQ5-2A&usqp=CAU',
         plays: '4 300 124',
         duration: '3:53',
-        source: '../audio/six-days.mp3',
+        // source: '../audio/six-days.mp3',
+        source: 'http://95.216.153.85/listen/rest1/radio.mp3',
         liked: true
       },
       items1: [

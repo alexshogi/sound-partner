@@ -16,6 +16,7 @@
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.25.3",
     "firebase": "^9.14.0",
+    "howler": "^2.2.3",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",

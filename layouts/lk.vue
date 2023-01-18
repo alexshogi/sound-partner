@@ -221,7 +221,7 @@ export default {
         { title: 'Главная', icon: 'mdi-home', route: '/dashboard' },
         { title: 'Обзор', icon: 'mdi-view-dashboard', route: '/review' },
         { title: 'Альбомы', icon: 'mdi-folder-play', route: '/albums' },
-        { title: 'Артисты', icon: 'mdi-account-music', route: '/artists' },
+        // { title: 'Артисты', icon: 'mdi-account-music', route: '/artists' },
         { title: 'Понравилось', icon: 'mdi-heart', route: '/favourite' },
       ],
       items2: [
@@ -299,6 +299,8 @@ export default {
   methods: {
     changeTrack (track) {
       this.currentTrack = track;
+
+      console.log('changeTrack', track)
     }
   }
 }

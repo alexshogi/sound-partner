@@ -26,6 +26,8 @@
         :disabled="!loaded"
         @change="setPosition"
       />
+      <span class="duration">{{ elapsedTime }}</span>
+      <span> / </span>
       <span class="duration">{{ duration }}</span>
       <audio
         id="player"
@@ -99,62 +101,74 @@
         percentage: 0,
         currentTime: '00:00',
         audio: undefined,
+        sound: null,
         totalDuration: 0,
-        playerVolume: 1
+        elapsed: 0,
+        playerVolume: 1,
+        updateTimeIntervalId: null
       }
     },
     computed: {
       duration: function () {
         return this.audio && this.totalDuration ? formatTime(this.totalDuration) : ''
       },
+      elapsedTime: function () {
+        return this.audio && this.elapsed ? formatTime(this.elapsed) : ''
+      },
       source () {
         return this.track.source;
       }
     },
     watch: {
-      title: function () {
+      track: function (newVal, oldVal) {
         this.audio = this.$refs.player;
-        this.init();
 
-        console.log('*****')
+        console.log('***** watch track')
         console.log(this.track)
 
-        if (this.autoplay) {
-          setTimeout(() => {
-            this.audio.play().then(() => this.playing = true)
-          }, 50);
+        console.log(newVal)
+        console.log(oldVal)
+
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          this.init();
         }
       },
+      deep: true,
     },
     mounted () {
-      this.audio = this.$refs.player;
-      this.init();
+      // this.audio = this.$refs.player;
+      // this.init();
 
-      if (this.autoplay) {
-        setTimeout(() => {
-          this.audio.play().then(() => this.playing = true)
-        }, 50);
-      }
+      // if (this.autoplay) {
+      //   setTimeout(() => {
+      //     this.audio.play().then(() => this.playing = true)
+      //   }, 50);
+      // }
     },
     beforeUnmount () {
       this.audio.removeEventListener('timeupdate', this._handlePlayingUI)
       this.audio.removeEventListener('loadeddata', this._handleLoaded)
       this.audio.removeEventListener('pause', this._handlePlayPause)
       this.audio.removeEventListener('play', this._handlePlayPause)
-      this.audio.removeEventListener('ended', this._handleEnded);
+      this.audio.removeEventListener('ended', this._handleEnded)
     },
     methods: {
       setPosition () {
+        // this.audio.currentTime = parseInt(this.audio.duration / 100 * this.percentage);
         this.audio.currentTime = parseInt(this.audio.duration / 100 * this.percentage);
       },
       play () {
         if (this.playing) return
-        this.audio.play().then(() => this.playing = true)
-        this.paused = false
+        // this.audio.play().then(() => this.playing = true)
+
+        this.sound.play();
+        this.playing = true;
+        this.paused = false;
       },
       pause () {
         this.paused = !this.paused;
-        (this.paused) ? this.audio.pause() : this.audio.play()
+        // (this.paused) ? this.audio.pause() : this.audio.play()
+        (this.paused) ? this.sound.pause() : this.sound.play()
       },
       _handleLoaded: function () {
         if (this.audio.readyState >= 2) {
@@ -186,9 +200,9 @@
         this.paused = this.playing = false;
       },
       init: function () {
-        // this.audio.addEventListener('timeupdate', this._handlePlayingUI);
-        // this.audio.addEventListener('loadeddata', this._handleLoaded);
-        // this.audio.addEventListener('ended', this._handleEnded);
+        this.audio.addEventListener('timeupdate', this._handlePlayingUI);
+        this.audio.addEventListener('loadeddata', this._handleLoaded);
+        this.audio.addEventListener('ended', this._handleEnded);
         // this.playing = false;
 
         // setTimeout(() => {
@@ -197,18 +211,39 @@
 
         console.log(this.track);
 
+        this.elapsed = 0;
+        this.totalDuration = 0;
+
+        clearInterval(this.updateTimeIntervalId);
+
         const sound = new Howl({
           src: [this.track.source],
           html5: true
         });
 
+        console.log('sound', sound)
+
+        this.sound = sound;
+        this.totalDuration = this.track.duration;
+        this.elapsed = this.track.elapsed;
+        this.loaded = true;
+        this.paused = true;
+
+        this.updateTimeIntervalId = setInterval(this.updateClock, 1000);
         // sound.play();
 
-        setTimeout(() => {
-          this.playing = true;
-          sound.play();
-        }, 3000);
+        // setTimeout(() => {
+        //   this.playing = true;
+        //   sound.play();
+        // }, 3000);
       },
+      updateClock () {
+        this.elapsed++;
+
+        if (this.elapsed >= this.totalDuration) {
+          clearInterval(this.updateTimeIntervalId);
+        }
+      }
     }
   }
 </script>

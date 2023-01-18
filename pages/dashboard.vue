@@ -342,15 +342,6 @@ export default {
     }
   },
   mounted () {
-    // http://95.216.153.85/
-
-    // this.$axios.get('https://95.216.153.85/api/stations')
-    //   .then((result) => {
-    //     console.log(result);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
     this.getStation();
   },
   methods: {
@@ -358,24 +349,14 @@ export default {
       // this.$nuxt.$emit('change-song', item);
     },
     getStation () {
-      console.log('*** getStation');
       this.$axios.get('https://95.216.153.85/api/nowplaying/1')
         .then((result) => {
-          console.log('res');
-          console.log(result);
-
           const track = result.data.now_playing;
           const station = result.data.station;
 
           this.$nuxt.$emit('change-song', {
-            artist: track.song.artist,
-            title: track.song.title,
-            avatar: track.song.art,
-            id: track.song.id,
-            duration: track.duration,
-            elapsed: track.elapsed,
-            source: station.listen_url,
-            liked: false
+            ...track,
+            ...station
           });
 
           this.remaining = track.remaining;
@@ -385,7 +366,6 @@ export default {
             if (delay < 5000) {
               delay = 5000;
             }
-            console.log('delay', delay);
 
             setTimeout(() => {
               this.getStation();

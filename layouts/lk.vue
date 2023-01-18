@@ -190,7 +190,6 @@
               wide
               autoplay
               :track="currentTrack"
-              :title="currentTrack.title"
             />
           </v-list-item>
         </v-list>
@@ -285,6 +284,7 @@ export default {
   created() {
     this.$nuxt.$on('change-song', (track) => {
       this.changeTrack(track);
+      console.log('change track event handle')
       console.log(track)
     })
 
@@ -299,8 +299,6 @@ export default {
   methods: {
     changeTrack (track) {
       this.currentTrack = track;
-
-      console.log('changeTrack', track)
     }
   }
 }

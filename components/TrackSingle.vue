@@ -1,47 +1,83 @@
 <template>
-  <section
-    class="track"
-    :class="{ 'full-width': wide, 'flat': wide }"
-  >
-    <h3>{{ track.artist }} — {{ track.title }}</h3>
-    <div class="params">
-      <v-btn
-        class="control-btn"
-        icon
-        :color="color"
-        :disabled="!loaded"
-        @click="playing ? pause() : play()"
+  <div>
+    <div
+      v-if="loading"
+      class="content-container"
+    >
+      <div
+        class="d-flex justify-center align-center pa-5"
+        style="min-height: 80px;"
       >
-        <v-icon v-if="!playing || paused">
-          {{ playIcon }}
-        </v-icon>
-        <v-icon v-else>
-          {{ pauseIcon }}
-        </v-icon>
-      </v-btn>
-      <v-progress-linear
-        v-model="percentage"
-        height="2"
-        class="mx-4 mt-1"
-        :disabled="!loaded"
-        @change="setPosition"
-      />
-      <span class="duration">{{ elapsedTime }}</span>
-      <span> / </span>
-      <span class="duration">{{ duration }}</span>
-      <audio
-        id="player"
-        ref="player"
-        :src="source"
-        @ended="ended"
-        @canplay="canPlay"
-      />
+        <v-progress-circular
+          indeterminate
+          color="#2256F6"
+        />
+      </div>
     </div>
-  </section>
+
+    <section
+      v-if="!loading"
+      class="track"
+      :class="{ 'full-width': wide, 'flat': wide, 'padless': history }"
+    >
+      <div
+        class="d-flex"
+      >
+        <img
+          :src="track.song.art"
+          width="56"
+          height="56"
+          alt="ALBUM"
+          class="mr-3"
+        >
+
+        <div style="flex: 1;">
+          <h3>{{ track.song.title }}</h3>
+          <p>{{ track.song.artist }}</p>
+        </div>
+
+        <div
+          v-if="history"
+        >
+          <span class="duration">{{ duration }}</span>
+        </div>
+      </div>
+
+      <div
+        v-if="!history"
+        class="params mt-2"
+      >
+        <v-btn
+          v-if="!history"
+          class="control-btn"
+          icon
+          :color="color"
+          :disabled="loading"
+          @click="playing ? pause() : play()"
+        >
+          <v-icon v-if="!playing || paused">
+            {{ playIcon }}
+          </v-icon>
+          <v-icon v-else>
+            {{ pauseIcon }}
+          </v-icon>
+        </v-btn>
+        <v-progress-linear
+          v-model="percentage"
+          height="2"
+          class="mx-4 mt-1"
+          disabled
+        />
+        <span class="duration">{{ elapsedTime }}</span>
+        <span> / </span>
+        <span class="duration">{{ duration }}</span>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
-  import { Howl, Howler } from 'howler'
+  import { Howl } from 'howler'
 
   const formatTime = second => new Date(second * 1000).toISOString().substr(14, 5);
 
@@ -64,13 +100,13 @@
         type: Object,
         required: true
       },
-      autoplay: {
+      history: {
         type: Boolean,
         default: false
       },
-      title: {
-        type: String,
-        required: true
+      autoplay: {
+        type: Boolean,
+        default: false
       },
       ended: {
         type: Function,
@@ -95,12 +131,11 @@
     },
     data () {
       return {
-        loaded: false,
+        loading: true,
         playing: false,
         paused: false,
         percentage: 0,
         currentTime: '00:00',
-        audio: undefined,
         sound: null,
         totalDuration: 0,
         elapsed: 0,
@@ -110,132 +145,77 @@
     },
     computed: {
       duration: function () {
-        return this.audio && this.totalDuration ? formatTime(this.totalDuration) : ''
+        return this.sound && this.totalDuration ? formatTime(this.totalDuration) : ''
       },
       elapsedTime: function () {
-        return this.audio && this.elapsed ? formatTime(this.elapsed) : ''
+        return this.sound && this.elapsed ? formatTime(this.elapsed) : ''
       },
       source () {
-        return this.track.source;
+        return this.track.song.listen_url;
       }
     },
     watch: {
       track: function (newVal, oldVal) {
-        this.audio = this.$refs.player;
-
-        console.log('***** watch track')
-        console.log(this.track)
-
-        console.log(newVal)
-        console.log(oldVal)
-
         if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          console.log('-> init player');
+          this.loading = true;
           this.init();
         }
       },
       deep: true,
     },
     mounted () {
-      // this.audio = this.$refs.player;
-      // this.init();
-
-      // if (this.autoplay) {
-      //   setTimeout(() => {
-      //     this.audio.play().then(() => this.playing = true)
-      //   }, 50);
-      // }
-    },
-    beforeUnmount () {
-      this.audio.removeEventListener('timeupdate', this._handlePlayingUI)
-      this.audio.removeEventListener('loadeddata', this._handleLoaded)
-      this.audio.removeEventListener('pause', this._handlePlayPause)
-      this.audio.removeEventListener('play', this._handlePlayPause)
-      this.audio.removeEventListener('ended', this._handleEnded)
+      if (this.track?.sh_id) {
+        this.init();
+      }
     },
     methods: {
-      setPosition () {
-        // this.audio.currentTime = parseInt(this.audio.duration / 100 * this.percentage);
-        this.audio.currentTime = parseInt(this.audio.duration / 100 * this.percentage);
-      },
       play () {
-        if (this.playing) return
-        // this.audio.play().then(() => this.playing = true)
+        if (!this.sound) return;
 
         this.sound.play();
-        this.playing = true;
+
+        
         this.paused = false;
+        this.playing = true;
       },
       pause () {
         this.paused = !this.paused;
-        // (this.paused) ? this.audio.pause() : this.audio.play()
-        (this.paused) ? this.sound.pause() : this.sound.play()
-      },
-      _handleLoaded: function () {
-        if (this.audio.readyState >= 2) {
-          if (this.audio.duration === Infinity) {
-            // Fix duration for streamed audio source or blob based
-            // https://stackoverflow.com/questions/38443084/how-can-i-add-predefined-length-to-audio-recorded-from-mediarecorder-in-chrome/39971175#39971175
-            this.audio.currentTime = 1e101;
-            this.audio.ontimeupdate = () => {
-              this.audio.ontimeupdate = () => {}
-              this.audio.currentTime = 0
-              this.totalDuration = parseInt(this.audio.duration)
-              this.loaded = true;
-            }
-          } else {
-            this.totalDuration = parseInt(this.audio.duration)
-            this.loaded = true
-          }
-        } else {
-          throw new Error('Failed to load sound file')
-        }
-      },
-      _handlePlayingUI: function () {
-        this.audio.volume = this.playerVolume
-        this.percentage = this.audio.currentTime / this.audio.duration * 100
-        this.currentTime = formatTime(this.audio.currentTime)
-        this.playing = true
-      },
-      _handleEnded () {
-        this.paused = this.playing = false;
+        this.paused ? this.sound.pause() : this.sound.play()
       },
       init: function () {
-        this.audio.addEventListener('timeupdate', this._handlePlayingUI);
-        this.audio.addEventListener('loadeddata', this._handleLoaded);
-        this.audio.addEventListener('ended', this._handleEnded);
-        // this.playing = false;
-
-        // setTimeout(() => {
-        //   this.playing = false;
-        // }, 10);
-
-        console.log(this.track);
+        console.log('//////////////////')
+        console.log(this.track)
 
         this.elapsed = 0;
         this.totalDuration = 0;
+        // this.playing = false;
+        this.paused = false;
 
         clearInterval(this.updateTimeIntervalId);
 
+        if (this.sound) {
+          this.sound = null;
+        }
+
         const sound = new Howl({
-          src: [this.track.source],
-          html5: true
+          src: [this.track.listen_url],
+          // autoplay: this.autoplay ? true : false,
+          html5: true,
         });
 
-        console.log('sound', sound)
+        if (this.autoplay) {
+          this.play();
+        }
 
         this.sound = sound;
+
         this.totalDuration = this.track.duration;
         this.elapsed = this.track.elapsed;
-        this.loaded = true;
-        this.paused = true;
 
         this.updateTimeIntervalId = setInterval(this.updateClock, 1000);
-        // sound.play();
 
-        // setTimeout(() => {
-        //   this.playing = true;
-        //   sound.play();
-        // }, 3000);
+        this.loading = false;
       },
       updateClock () {
         this.elapsed++;
@@ -250,7 +230,6 @@
 
 <style lang="scss" scoped>
   .track {
-    height: 80px;
     background: #FFFFFF;
     box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.18);
     border-radius: 10px;
@@ -266,15 +245,29 @@
       box-shadow: none;
     }
 
+    &.padless {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
     h3 {
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 19px;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 21px;
       color: #272727;
-      text-align: center;
+      text-align: left;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: #272727;
+      text-align: left;
     }
 
     .params {
+      flex: 1;
       display: flex;
       flex-direction: row;
       justify-content: space-between;

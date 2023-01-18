@@ -157,6 +157,9 @@ export default {
       ]
     }
   },
+  created () {
+    this.$nuxt.$emit('hide-sidebar');
+  },
 }
 </script>
 

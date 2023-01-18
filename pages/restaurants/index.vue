@@ -1,7 +1,25 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <main>
-    <div class="content-container">
+    <div
+      v-if="loading"
+      class="content-container"
+    >
+      <div
+        class="d-flex justify-center align-center pa-5"
+        style="min-height: 400px;"
+      >
+        <v-progress-circular
+          indeterminate
+          color="#2256F6"
+        />
+      </div>
+    </div>
+
+    <div
+      v-if="!loading"
+      class="content-container"
+    >
       <h2 class="mb-4">
         Рестораны
       </h2>
@@ -13,15 +31,20 @@
           cols="12"
           lg="4"
         >
-          <div class="rest-card">
+          <div
+            v-if="r"
+            class="rest-card"
+          >
             <div>
               <h4 class="mb-2">
-                Ресторан “Небо”
+                Ресторан “{{ r.station.name }}”
               </h4>
-              <h4>Сейчас играет “Millions Always Never”</h4>
+              <h4 v-if="r.now_playing && r.now_playing.song">
+                Сейчас играет “{{ r.now_playing.song.text }}”
+              </h4>
             </div>
             <div class="d-flex justify-end">
-              <NuxtLink :to="{ path: `myrestaurants/${r.id}` }">
+              <NuxtLink :to="{ path: `restaurants/${r.station.id}` }">
                 <v-btn
                   class="simple-btn"
                   depressed
@@ -42,119 +65,49 @@ export default {
   layout: 'lk',
   data () {
     return {
-      restaurants: [
-        {
-          title: 'Небо',
-          id: 'f6d5f5d',
-          image: 'https://www.spoon-restaurant.com/wp-content/uploads/2022/06/Spoon_cLe_Bonbon-1-scaled.jpg',
-          currentTrack: {
-            artist: 'Alan Walker',
-            title: 'The Drum',
-            avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
-            plays: '8 796 542',
-            duration: '3:09',
-            source: '../audio/the-drum.mp3',
-            number: '01',
-            liked: true
-          },
-          history: [
-            {
-              artist: 'Always Never',
-              title: 'Millions',
-              avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
-              plays: '8 096 542',
-              duration: '3:58',
-              source: '../audio/millions.mp3',
-              number: '02',
-              liked: true
-            },
-            {
-              artist: 'DJ Shadow, Mos Def',
-              title: 'Six Days',
-              avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy15ez24PqDSOEn7zfVZTAz-U22aDiQ5-2A&usqp=CAU',
-              plays: '4 300 124',
-              duration: '3:53',
-              source: '../audio/six-days.mp3',
-              number: '03',
-              liked: true
+      loading: true,
+      restaurants: [],
+    }
+  },
+  created () {
+    this.$nuxt.$emit('hide-sidebar');
+
+    this.getStations();
+  },
+  // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
+  beforeDestroy () {
+    this.$nuxt.$emit('show-sidebar');
+  },
+  methods: {
+    getStations () {
+      this.$axios.get('https://95.216.153.85/api/stations')
+        .then((result) => {
+          if (result?.data) {
+            this.restaurants = [ ...result.data ];
+
+            this.getStationsInfo();
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    getStationsInfo () {
+      for (const [index, r] of this.restaurants.entries()) {
+        this.$axios.get(`https://95.216.153.85/api/nowplaying/${r.id}`)
+          .then((result) => {
+            if (result?.data) {
+              this.restaurants[index] = result.data;
             }
-          ]
-        },
-        {
-          title: 'Небо',
-          id: 'd89s8dx',
-          image: 'https://www.spoon-restaurant.com/wp-content/uploads/2022/06/Spoon_cLe_Bonbon-1-scaled.jpg',
-          currentTrack: {
-            artist: 'Alan Walker',
-            title: 'The Drum',
-            avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
-            plays: '8 796 542',
-            duration: '3:09',
-            source: '../audio/the-drum.mp3',
-            number: '01',
-            liked: true
-          },
-          history: [
-            {
-              artist: 'Always Never',
-              title: 'Millions',
-              avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
-              plays: '8 096 542',
-              duration: '3:58',
-              source: '../audio/millions.mp3',
-              number: '02',
-              liked: true
-            },
-            {
-              artist: 'DJ Shadow, Mos Def',
-              title: 'Six Days',
-              avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy15ez24PqDSOEn7zfVZTAz-U22aDiQ5-2A&usqp=CAU',
-              plays: '4 300 124',
-              duration: '3:53',
-              source: '../audio/six-days.mp3',
-              number: '03',
-              liked: true
+
+            if (index === this.restaurants.length - 1) {
+              this.loading = false;
             }
-          ]
-        },
-        {
-          title: 'Небо',
-          id: '22a3sas',
-          image: 'https://www.spoon-restaurant.com/wp-content/uploads/2022/06/Spoon_cLe_Bonbon-1-scaled.jpg',
-          currentTrack: {
-            artist: 'Alan Walker',
-            title: 'The Drum',
-            avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
-            plays: '8 796 542',
-            duration: '3:09',
-            source: '../audio/the-drum.mp3',
-            number: '01',
-            liked: true
-          },
-          history: [
-            {
-              artist: 'Always Never',
-              title: 'Millions',
-              avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
-              plays: '8 096 542',
-              duration: '3:58',
-              source: '../audio/millions.mp3',
-              number: '02',
-              liked: true
-            },
-            {
-              artist: 'DJ Shadow, Mos Def',
-              title: 'Six Days',
-              avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy15ez24PqDSOEn7zfVZTAz-U22aDiQ5-2A&usqp=CAU',
-              plays: '4 300 124',
-              duration: '3:53',
-              source: '../audio/six-days.mp3',
-              number: '03',
-              liked: true
-            }
-          ]
-        }
-      ]
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     }
   },
 }

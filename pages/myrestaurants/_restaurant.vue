@@ -23,7 +23,6 @@
             wide
             autoplay
             :track="restaurant.currentTrack"
-            :title="restaurant.currentTrack.title"
           />
 
           <h2 class="mb-4 mt-8">
@@ -32,12 +31,11 @@
 
           <TrackSingle
             v-for="track in restaurant.history"
-            :key="track.title + track.number"
+            :key="track.song.id"
             class="mb-5"
             flat
             wide
             :track="track"
-            :title="track.title"
           />
         </section>
 

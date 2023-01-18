@@ -38,22 +38,18 @@
               <TrackSingle
                 class="mb-5"
                 :track="track"
-                :title="track.title"
               />
               <TrackSingle
                 class="mb-5"
                 :track="track"
-                :title="track.title"
               />
               <TrackSingle
                 class="mb-5"
                 :track="track"
-                :title="track.title"
               />
               <TrackSingle
                 class="mb-5"
                 :track="track"
-                :title="track.title"
               />
             </div>
             <div class="d-flex justify-center">

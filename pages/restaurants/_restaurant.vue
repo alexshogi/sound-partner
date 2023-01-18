@@ -64,19 +64,19 @@
             Плейлист(-ы) ресторана
           </h2>
 
-          <!-- <v-row>
+          <v-row>
             <v-col
-              v-for="playlist in restaurant.playlists"
+              v-for="playlist in playlists"
               :key="playlist.id"
             >
               <div class="playlist-card">
                 <h4 class="mb-2">
-                  {{ playlist.title }}
+                  {{ playlist.name }}
                 </h4>
-                <p>{{ playlist.tracksCount }} треков</p>
+                <p>{{ playlist.num_songs }} треков</p>
               </div>
             </v-col>
-          </v-row> -->
+          </v-row>
         </aside>
       </div>
     </div>

@@ -95,6 +95,7 @@ export default {
     return {
       loading: true,
       restaurant: {},
+      playlists: [],
       currentTrack: null
     }
   },
@@ -102,6 +103,7 @@ export default {
     this.$nuxt.$emit('hide-sidebar');
 
     this.getStationInfo();
+    this.getPlaylists();
   },
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   beforeDestroy () {
@@ -134,7 +136,22 @@ export default {
       setTimeout(() => {
         this.getStationInfo();
       }, 5000);
-    }
+    },
+    getPlaylists () {
+      const itemId = this.$route.params.restaurant;
+
+      this.$axios.get(`https://95.216.153.85/api/station/${itemId}/playlists`)
+        .then((result) => {
+          if (result?.data) {
+            this.playlists = result.data;
+          }
+
+          console.log(this.playlists);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
   }
 }
 </script>

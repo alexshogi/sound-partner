@@ -113,7 +113,7 @@ export default {
     getStationInfo () {
       const itemId = this.$route.params.restaurant;
 
-      this.$axios.get(`https://95.216.153.85/api/nowplaying/${itemId}`)
+      this.$axios.get(`http://95.216.153.85/api/nowplaying/${itemId}`)
         .then((result) => {
           if (result?.data) {
             this.restaurant = result.data;
@@ -140,7 +140,7 @@ export default {
     getPlaylists () {
       const itemId = this.$route.params.restaurant;
 
-      this.$axios.get(`https://95.216.153.85/api/station/${itemId}/playlists`)
+      this.$axios.get(`http://95.216.153.85/api/station/${itemId}/playlists`)
         .then((result) => {
           if (result?.data) {
             this.playlists = result.data;

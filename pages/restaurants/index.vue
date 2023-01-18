@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     getStations () {
-      this.$axios.get('https://95.216.153.85/api/stations')
+      this.$axios.get('http://95.216.153.85/api/stations')
         .then((result) => {
           if (result?.data) {
             this.restaurants = [ ...result.data ];
@@ -94,7 +94,7 @@ export default {
     },
     getStationsInfo () {
       for (const [index, r] of this.restaurants.entries()) {
-        this.$axios.get(`https://95.216.153.85/api/nowplaying/${r.id}`)
+        this.$axios.get(`http://95.216.153.85/api/nowplaying/${r.id}`)
           .then((result) => {
             if (result?.data) {
               this.restaurants[index] = result.data;

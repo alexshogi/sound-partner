@@ -8,7 +8,7 @@
         >
           <div class="rest-playlist-card">
             <div>
-              <h4>Плейлист для “Ресторана”</h4>
+              <h4>Плейлист для “Весна”</h4>
             </div>
           </div>
         </v-col>

@@ -14,7 +14,7 @@
           <div class="rest-card">
             <div>
               <h4 class="mb-2">
-                Ресторан “Небо”
+                Бассейн “Небо”
               </h4>
               <h4>Сейчас играет “Millions Always Never”</h4>
             </div>
@@ -56,7 +56,7 @@
           <div class="rest-card">
             <div>
               <h4 class="mb-2">
-                Ресторан “Под дубом”
+                Баня “Под дубом”
               </h4>
               <h4>Сейчас играет “Millions Always Never”</h4>
             </div>

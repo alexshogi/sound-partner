@@ -17,7 +17,7 @@
       </div>
 
       <v-text-field
-        placeholder="Поиск музыки, альбома, артиста или ресторана"
+        placeholder="Поиск музыки, альбома, артиста или заведения"
         solo
         dense
         hide-details
@@ -69,7 +69,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="nav-heading">
-              Обзор ресторана
+              Обзор заведения
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

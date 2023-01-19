@@ -182,8 +182,12 @@
         this.playing = true;
       },
       pause () {
-        this.paused = !this.paused;
-        this.paused ? this.sound.pause() : this.sound.play()
+        if (!this.sound) return;
+
+        this.sound.pause()
+
+        this.paused = true;
+        this.playing = false;
       },
       init: function () {
         this.elapsed = 0;

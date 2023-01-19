@@ -145,7 +145,7 @@
 
         <v-card-text>
           <v-form>
-            form hahaha
+            TODO: Здесь будет редактирование плейлиста
           </v-form>
         </v-card-text>
 

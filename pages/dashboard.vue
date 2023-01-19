@@ -85,70 +85,6 @@
         </v-btn>
       </div>
 
-      <v-row>
-        <v-col cols="12">
-          <v-simple-table>
-            <template #default>
-              <tbody>
-                <tr
-                  v-for="(item, index) in items"
-                  :key="item.name"
-                >
-                  <td width="10">
-                    {{ '0' + (index + 1) }}
-                  </td>
-                  <td
-                    width="50"
-                    style="position: relative;"
-                  >
-                    <v-img
-                      min-height="50"
-                      min-width="50"
-                      max-height="50"
-                      max-width="50"
-                      :src="item.avatar"
-                      style="background: #D9D9D9; border-radius: 5px;"
-                    />
-                    <div
-                      class="avatar-hover"
-                      @click="play(item)"
-                    >
-                      <v-icon>mdi-play</v-icon>
-                    </div>
-                  </td>
-                  <td width="200">
-                    {{ item.title }}
-                  </td>
-                  <td>{{ item.artist }}</td>
-                  <td width="160">
-                    {{ item.plays }}
-                  </td>
-                  <td width="100">
-                    {{ item.duration }}
-                  </td>
-                  <td width="100">
-                    <v-icon
-                      v-if="item.liked"
-                      color="#2256F6"
-                      @click="item.liked = !item.liked"
-                    >
-                      mdi-heart
-                    </v-icon>
-                    <v-icon
-                      v-else
-                      color="#2256F6"
-                      @click="item.liked = !item.liked"
-                    >
-                      mdi-heart-outline
-                    </v-icon>
-                  </td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
-        </v-col>
-      </v-row>
-
       <div class="d-flex justify-space-between align-center mt-12 mb-4">
         <h2>
           Популярно для тебя
@@ -161,70 +97,6 @@
           Смотреть все
         </v-btn>
       </div>
-
-      <v-row>
-        <v-col cols="12">
-          <v-simple-table>
-            <template #default>
-              <tbody>
-                <tr
-                  v-for="(item, index) in recommendedItems"
-                  :key="item.name"
-                >
-                  <td width="10">
-                    {{ '0' + (index + 1) }}
-                  </td>
-                  <td
-                    width="50"
-                    style="position: relative;"
-                  >
-                    <v-img
-                      min-height="50"
-                      min-width="50"
-                      max-height="50"
-                      max-width="50"
-                      :src="item.avatar"
-                      style="background: #D9D9D9; border-radius: 5px;"
-                    />
-                    <div
-                      class="avatar-hover"
-                      @click="play(item)"
-                    >
-                      <v-icon>mdi-play</v-icon>
-                    </div>
-                  </td>
-                  <td width="200">
-                    {{ item.title }}
-                  </td>
-                  <td>{{ item.artist }}</td>
-                  <td width="160">
-                    {{ item.plays }}
-                  </td>
-                  <td width="100">
-                    {{ item.duration }}
-                  </td>
-                  <td width="100">
-                    <v-icon
-                      v-if="item.liked"
-                      color="#2256F6"
-                      @click="item.liked = !item.liked"
-                    >
-                      mdi-heart
-                    </v-icon>
-                    <v-icon
-                      v-else
-                      color="#2256F6"
-                      @click="item.liked = !item.liked"
-                    >
-                      mdi-heart-outline
-                    </v-icon>
-                  </td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
-        </v-col>
-      </v-row>
     </div>
   </main>
 </template>
@@ -234,120 +106,13 @@ export default {
   layout: 'lk',
   data () {
     return {
-      remaining: 0,
-      items: [
-        {
-          artist: 'Always Never',
-          title: 'Millions',
-          avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
-          plays: '8 096 542',
-          duration: '3:58',
-          source: '../audio/millions.mp3',
-          number: '01',
-          liked: true
-        },
-        {
-          artist: 'Always Never',
-          title: 'Millions',
-          avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
-          plays: '8 096 542',
-          duration: '3:58',
-          source: '../audio/millions.mp3',
-          number: '02',
-          liked: true
-        },
-        {
-          artist: 'DJ Shadow, Mos Def',
-          title: 'Six Days',
-          avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy15ez24PqDSOEn7zfVZTAz-U22aDiQ5-2A&usqp=CAU',
-          plays: '4 300 124',
-          duration: '3:53',
-          source: '../audio/six-days.mp3',
-          number: '03',
-          liked: true
-        },
-        {
-          artist: 'Always Never',
-          title: 'Millions',
-          avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
-          plays: '8 096 542',
-          duration: '3:58',
-          source: '../audio/millions.mp3',
-          number: '04',
-          liked: true
-        },
-        {
-          artist: 'Always Never',
-          title: 'Millions',
-          avatar: 'https://nikkur.ru/wp-content/uploads/2019/11/always-never-300x300.jpg',
-          plays: '8 096 542',
-          duration: '3:58',
-          source: '../audio/millions.mp3',
-          number: '05',
-          liked: true
-        },
-      ],
-      recommendedItems: [
-        {
-          artist: 'Alan Walker',
-          title: 'The Drum',
-          avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
-          plays: '8 796 542',
-          duration: '3:09',
-          source: '../audio/the-drum.mp3',
-          number: '01',
-          liked: false
-        },
-        {
-          artist: 'Alan Walker',
-          title: 'The Drum',
-          avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
-          plays: '8 796 542',
-          duration: '3:09',
-          source: '../audio/the-drum.mp3',
-          number: '02',
-          liked: false
-        },
-        {
-          artist: 'Alan Walker',
-          title: 'The Drum',
-          avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
-          plays: '8 796 542',
-          duration: '3:09',
-          source: '../audio/the-drum.mp3',
-          number: '03',
-          liked: false
-        },
-        {
-          artist: 'Alan Walker',
-          title: 'The Drum',
-          avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
-          plays: '8 796 542',
-          duration: '3:09',
-          source: '../audio/the-drum.mp3',
-          number: '04',
-          liked: false
-        },
-        {
-          artist: 'Alan Walker',
-          title: 'The Drum',
-          avatar: 'http://s3.ap-south-1.amazonaws.com/discovery-prod-zion/zion/1671119553458-alan_walker.jpg',
-          plays: '8 796 542',
-          duration: '3:09',
-          source: '../audio/the-drum.mp3',
-          number: '05',
-          liked: false
-        },
-      ],
+      loading: false,
     }
   },
   mounted () {
     this.getStation();
   },
   methods: {
-    play (item) {
-      // this.$nuxt.$emit('change-song', item);
-    },
     getStation () {
       this.$axios.get('nowplaying/1')
         .then((result) => {
@@ -358,19 +123,6 @@ export default {
             ...track,
             ...station
           });
-
-          this.remaining = track.remaining;
-
-          if (this.remaining) {
-            let delay = (this.remaining - 2) * 1000;
-            if (delay < 5000) {
-              delay = 5000;
-            }
-
-            setTimeout(() => {
-              this.getStation();
-            }, delay);
-          }
         })
         .catch((err) => {
           console.error(err);

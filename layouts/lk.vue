@@ -42,25 +42,28 @@
           dense
           nav
         >
-          <v-list-item
+          <div
             v-for="item in items1"
             :key="item.title"
-            class="nav-item"
-            link
           >
             <NuxtLink
               :to="{ path: item.route }"
               class="d-flex"
             >
-              <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-icon>
+              <v-list-item
+                class="nav-item"
+                link
+              >
+                <v-list-item-icon>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
 
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
-            </NuxtLink>
-          </v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </nuxtlink>
+          </div>
         </v-list>
 
         <v-list-item>
@@ -75,27 +78,28 @@
           dense
           nav
         >
-          <v-list-item
+          <div
             v-for="item in items2"
             :key="item.title"
-            class="nav-item"
-            link
-            active-class="highlighted"
-            :class="item.route === $route.path ? 'highlighted' : ''"
           >
             <NuxtLink
               :to="{ path: item.route }"
               class="d-flex"
             >
-              <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-icon>
+              <v-list-item
+                class="nav-item"
+                link
+              >
+                <v-list-item-icon>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
 
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
-            </NuxtLink>
-          </v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </nuxtlink>
+          </div>
         </v-list>
 
         <v-list-item>
@@ -110,24 +114,41 @@
           dense
           nav
         >
-          <v-list-item
+          <div
             v-for="item in items3"
             :key="item.title"
-            class="nav-item"
-            link
           >
             <NuxtLink
               :to="{ path: item.route }"
               class="d-flex"
             >
-              <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-icon>
+              <v-list-item
+                class="nav-item"
+                link
+              >
+                <v-list-item-icon>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
 
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
-            </NuxtLink>
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </nuxtlink>
+          </div>
+
+          <v-list-item
+            class="nav-item"
+            link
+            @click="logout"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-logout-variant</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Выход</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
@@ -139,7 +160,7 @@
       </v-main>
 
       <v-navigation-drawer
-        v-if="showSidebar"
+        v-if="showSidebar && false"
         right
         permanent
         width="400"
@@ -221,16 +242,15 @@ export default {
         { title: 'Обзор', icon: 'mdi-view-dashboard', route: '/review' },
         { title: 'Альбомы', icon: 'mdi-folder-play', route: '/albums' },
         { title: 'Понравилось', icon: 'mdi-heart', route: '/favourite' },
-        { title: 'Не понравилось', icon: 'mdi-heart', route: '/disliked' },
+        { title: 'Не понравилось', icon: 'mdi-heart-off', route: '/disliked' },
       ],
       items2: [
-        { title: 'Мои ресторан(-ы)', icon: 'mdi-home-group', route: '/myrestaurants' },
-        { title: 'Рестораны', icon: 'mdi-account-supervisor', route: '/restaurants' },
+        { title: 'Мои заведения', icon: 'mdi-home-city', route: '/objects' },
+        { title: 'Мои плейлисты', icon: 'mdi-playlist-music', route: '/playlists' },
+        { title: 'Мои файлы', icon: 'mdi-file-multiple', route: '/files' },
       ],
       items3: [
-        { title: 'Аккаунт', icon: 'mdi-cog', route: '/account' },
-        { title: 'Загрузить', icon: 'mdi-upload', route: '/upload' },
-        // { title: 'Выход', icon: 'mdi-logout-variant', route: '/' },
+        { title: 'Мой аккаунт', icon: 'mdi-cog', route: '/account' },
       ],
       tracks: [
         {
@@ -299,6 +319,9 @@ export default {
   methods: {
     changeTrack (track) {
       this.currentTrack = track;
+    },
+    logout () {
+      console.info('LOGOUT');
     }
   }
 }

@@ -21,12 +21,12 @@
       class="content-container"
     >
       <h2 class="mb-4">
-        Рестораны
+        Мои заведения
       </h2>
 
       <v-row>
         <v-col
-          v-for="r in restaurants"
+          v-for="r in objects"
           :key="r.id"
           cols="12"
           lg="4"
@@ -37,14 +37,14 @@
           >
             <div>
               <h4 class="mb-2">
-                Ресторан “{{ r.station.name }}”
+                {{ r.station?.name }}
               </h4>
               <h4 v-if="r.now_playing && r.now_playing.song">
                 Сейчас играет “{{ r.now_playing.song.text }}”
               </h4>
             </div>
             <div class="d-flex justify-end">
-              <NuxtLink :to="{ path: `restaurants/${r.station.id}` }">
+              <NuxtLink :to="{ path: `objects/${r.station.id}` }">
                 <v-btn
                   class="simple-btn"
                   depressed
@@ -66,7 +66,7 @@ export default {
   data () {
     return {
       loading: true,
-      restaurants: [],
+      objects: [],
     }
   },
   created () {
@@ -83,7 +83,7 @@ export default {
       this.$axios.get('stations')
         .then((result) => {
           if (result?.data) {
-            this.restaurants = [ ...result.data ];
+            this.objects = [ ...result.data ];
 
             this.getStationsInfo();
           }
@@ -93,14 +93,14 @@ export default {
         });
     },
     getStationsInfo () {
-      for (const [index, r] of this.restaurants.entries()) {
+      for (const [index, r] of this.objects.entries()) {
         this.$axios.get(`nowplaying/${r.id}`)
           .then((result) => {
             if (result?.data) {
-              this.restaurants[index] = result.data;
+              this.objects[index] = result.data;
             }
 
-            if (index === this.restaurants.length - 1) {
+            if (index === this.objects.length - 1) {
               this.loading = false;
             }
           })

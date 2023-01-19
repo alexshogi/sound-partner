@@ -145,10 +145,10 @@
     },
     computed: {
       duration: function () {
-        return this.sound && this.track.duration ? formatTime(this.track.duration) : ''
+        return this.track.duration ? formatTime(this.track.duration) : ''
       },
       elapsedTime: function () {
-        return this.sound && this.track.elapsed ? formatTime(this.track.elapsed) : ''
+        return this.track.elapsed ? formatTime(this.track.elapsed) : ''
       },
       source () {
         return this.track.song.listen_url;
@@ -163,25 +163,13 @@
         return parseInt((this.track.elapsed / this.track.duration) * 100)
       }
     },
-    // watch: {
-    //   track: function (newVal, oldVal) {
-    //     if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-          // console.log('-> init player');
-          // this.loading = true;
-          // this.init();
-
-          // if () {
-
-          // } else {
-
-          // }
-    //     }
-    //   },
-    //   deep: true,
-    // },
     mounted () {
       if (this.track?.sh_id) {
         this.init();
+      }
+
+      if (this.history) {
+        this.loading = false;
       }
     },
     methods: {

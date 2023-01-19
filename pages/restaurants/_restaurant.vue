@@ -40,7 +40,6 @@
             class="mb-5"
             flat
             wide
-            autoplay
             :track="currentTrack"
           />
 
@@ -49,8 +48,8 @@
           </h2>
 
           <TrackSingle
-            v-for="track in restaurant.song_history"
-            :key="track.song.id"
+            v-for="(track, index) in restaurant.song_history"
+            :key="track.song.id + index"
             class="mb-5"
             flat
             history
@@ -113,7 +112,7 @@ export default {
     getStationInfo () {
       const itemId = this.$route.params.restaurant;
 
-      this.$axios.get(`https://95.216.153.85/api/nowplaying/${itemId}`)
+      this.$axios.get(`nowplaying/${itemId}`)
         .then((result) => {
           if (result?.data) {
             this.restaurant = result.data;
@@ -125,6 +124,8 @@ export default {
               ...track,
               ...station
             }
+
+            console.log(this.currentTrack)
           }
 
           this.loading = false;
@@ -140,7 +141,7 @@ export default {
     getPlaylists () {
       const itemId = this.$route.params.restaurant;
 
-      this.$axios.get(`https://95.216.153.85/api/station/${itemId}/playlists`)
+      this.$axios.get(`station/${itemId}/playlists`)
         .then((result) => {
           if (result?.data) {
             this.playlists = result.data;

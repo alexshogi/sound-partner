@@ -32,8 +32,23 @@
         >
 
         <div style="flex: 1;">
-          <h3>{{ track.song.title }}</h3>
-          <p>{{ track.song.artist }}</p>
+          <h3>{{ title }}</h3>
+          <p>{{ artist }}</p>
+        </div>
+
+        <div
+          v-if="playing"
+          id="levels"
+        >
+          <div class="level level1" />
+          <div class="level level2" />
+          <div class="level level3" />
+          <div class="level level4" />
+          <div class="level level5" />
+          <div class="level level6" />
+          <div class="level level7" />
+          <div class="level level8" />
+          <div class="level level9" />
         </div>
 
         <div
@@ -63,13 +78,13 @@
           </v-icon>
         </v-btn>
         <v-progress-linear
-          v-model="percentage"
+          v-model="progress"
           height="2"
           class="mx-4 mt-1"
           disabled
         />
-        <span class="duration">{{ elapsedTime }}</span>
-        <span> / </span>
+        <!-- <span class="duration">{{ elapsedTime }}</span>
+        <span> / </span> -->
         <span class="duration">{{ duration }}</span>
       </div>
     </section>
@@ -84,10 +99,6 @@
   export default {
     name: 'TrackSingle',
     props: {
-      file: {
-        type: String,
-        default: null
-      },
       wide: {
         type: Boolean,
         default: false
@@ -108,14 +119,6 @@
         type: Boolean,
         default: false
       },
-      ended: {
-        type: Function,
-        default: () => {},
-      },
-      canPlay: {
-        type: Function,
-        default: () => {},
-      },
       color: {
         type: String,
         default: '#2256F6'
@@ -134,36 +137,48 @@
         loading: true,
         playing: false,
         paused: false,
-        percentage: 0,
-        currentTime: '00:00',
         sound: null,
         totalDuration: 0,
-        elapsed: 0,
         playerVolume: 1,
         updateTimeIntervalId: null
       }
     },
     computed: {
       duration: function () {
-        return this.sound && this.totalDuration ? formatTime(this.totalDuration) : ''
+        return this.sound && this.track.duration ? formatTime(this.track.duration) : ''
       },
       elapsedTime: function () {
-        return this.sound && this.elapsed ? formatTime(this.elapsed) : ''
+        return this.sound && this.track.elapsed ? formatTime(this.track.elapsed) : ''
       },
       source () {
         return this.track.song.listen_url;
+      },
+      title () {
+        return this.track.song.title;
+      },
+      artist () {
+        return this.track.song.artist;
+      },
+      progress () {
+        return parseInt((this.track.elapsed / this.track.duration) * 100)
       }
     },
-    watch: {
-      track: function (newVal, oldVal) {
-        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-          console.log('-> init player');
-          this.loading = true;
-          this.init();
-        }
-      },
-      deep: true,
-    },
+    // watch: {
+    //   track: function (newVal, oldVal) {
+    //     if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          // console.log('-> init player');
+          // this.loading = true;
+          // this.init();
+
+          // if () {
+
+          // } else {
+
+          // }
+    //     }
+    //   },
+    //   deep: true,
+    // },
     mounted () {
       if (this.track?.sh_id) {
         this.init();
@@ -175,7 +190,6 @@
 
         this.sound.play();
 
-        
         this.paused = false;
         this.playing = true;
       },
@@ -184,13 +198,8 @@
         this.paused ? this.sound.pause() : this.sound.play()
       },
       init: function () {
-        console.log('//////////////////')
-        console.log(this.track)
-
         this.elapsed = 0;
         this.totalDuration = 0;
-        // this.playing = false;
-        this.paused = false;
 
         clearInterval(this.updateTimeIntervalId);
 
@@ -198,17 +207,14 @@
           this.sound = null;
         }
 
-        const sound = new Howl({
+        this.sound = new Howl({
           src: [this.track.listen_url],
-          // autoplay: this.autoplay ? true : false,
           html5: true,
         });
 
         if (this.autoplay) {
           this.play();
         }
-
-        this.sound = sound;
 
         this.totalDuration = this.track.duration;
         this.elapsed = this.track.elapsed;
@@ -229,6 +235,43 @@
 </script>
 
 <style lang="scss" scoped>
+  $animation-name: 'pump-it-up';
+
+  @mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+      @content;
+    }
+    @-moz-keyframes #{$animationName} {
+      @content;
+    }
+    @-o-keyframes #{$animationName} {
+      @content;
+    }
+    @keyframes #{$animationName} {
+      @content;
+    }
+  }
+
+  @for $i from 1 through 9 {
+    @include keyframes(#{$animation-name+$i}) {
+      20% {
+
+      }
+      40% {
+        height: random(50) + px;
+      }
+      60% {
+        height: random(50) + px;
+      }
+      80% {
+        height: random(50) + px;
+      }
+      100% {
+        height: random(50) + px;
+      }
+    }
+  }
+
   .track {
     background: #FFFFFF;
     box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.18);
@@ -286,6 +329,38 @@
           height: 40px;
           font-size: 34px;
           width: 40px;
+        }
+      }
+    }
+
+    #levels {
+      width: 70px;
+      height: 50px;
+      top: 50%;
+      margin: 0 auto;
+      position: relative;
+
+      .level {
+        width: 3px;
+        height: 50px;
+        margin-left: 1px;
+        display: inline-block;
+        position: relative;
+
+        &:after {
+          content: ' ';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          background: rgba(34, 87, 246, 0.6);
+          width: 3px;
+        }
+
+        @for $i from 1 through 9 {
+          &.level#{$i}:after {
+            height: random(50) + px;
+            animation: #{$animation-name+$i} 600 + random(500) + ms linear infinite alternate;
+          }
         }
       }
     }

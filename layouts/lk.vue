@@ -220,8 +220,8 @@ export default {
         { title: 'Главная', icon: 'mdi-home', route: '/dashboard' },
         { title: 'Обзор', icon: 'mdi-view-dashboard', route: '/review' },
         { title: 'Альбомы', icon: 'mdi-folder-play', route: '/albums' },
-        // { title: 'Артисты', icon: 'mdi-account-music', route: '/artists' },
         { title: 'Понравилось', icon: 'mdi-heart', route: '/favourite' },
+        { title: 'Не понравилось', icon: 'mdi-heart', route: '/disliked' },
       ],
       items2: [
         { title: 'Мои ресторан(-ы)', icon: 'mdi-home-group', route: '/myrestaurants' },

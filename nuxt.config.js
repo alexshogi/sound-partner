@@ -45,7 +45,7 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.API_URL,
+    baseURL: 'http://95.216.153.85/api/',
     headers : {
       common: {
         'Authorization': 'Bearer 1271ff5d1d959d3e:c0e767d726d96fc3756264f1f7c0f105'

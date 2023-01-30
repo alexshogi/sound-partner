@@ -6,67 +6,48 @@
         Ваши заведения
       </h2>
 
-      <v-row>
+      <v-row
+        v-if="loadingStations"
+      >
+        <div
+          class="d-flex justify-center align-center pa-5"
+          style="min-height: 245px;"
+        >
+          <v-progress-circular
+            indeterminate
+            color="#2256F6"
+          />
+        </div>
+      </v-row>
+
+      <v-row v-if="!loadingStations && objects && objects.length">
         <v-col
+          v-for="r in objects"
+          :key="r.id"
           cols="12"
           lg="4"
         >
-          <div class="rest-card">
+          <div
+            v-if="r"
+            class="rest-card"
+          >
             <div>
               <h4 class="mb-2">
-                Бассейн “Небо”
+                {{ r.station?.name }}
               </h4>
-              <h4>Сейчас играет “Millions Always Never”</h4>
+              <h4 v-if="r.now_playing?.song">
+                Сейчас играет “{{ r.now_playing.song.text }}”
+              </h4>
             </div>
             <div class="d-flex justify-end">
-              <v-btn
-                class="simple-btn"
-                depressed
-              >
-                Подробнее
-              </v-btn>
-            </div>
-          </div>
-        </v-col>
-        <v-col
-          cols="12"
-          lg="4"
-        >
-          <div class="rest-card">
-            <div>
-              <h4 class="mb-2">
-                Ресторан “Весна”
-              </h4>
-              <h4>Сейчас играет “Millions Always Never”</h4>
-            </div>
-            <div class="d-flex justify-end">
-              <v-btn
-                class="simple-btn"
-                depressed
-              >
-                Подробнее
-              </v-btn>
-            </div>
-          </div>
-        </v-col>
-        <v-col
-          cols="12"
-          lg="4"
-        >
-          <div class="rest-card">
-            <div>
-              <h4 class="mb-2">
-                Баня “Под дубом”
-              </h4>
-              <h4>Сейчас играет “Millions Always Never”</h4>
-            </div>
-            <div class="d-flex justify-end">
-              <v-btn
-                class="simple-btn"
-                depressed
-              >
-                Подробнее
-              </v-btn>
+              <NuxtLink :to="{ path: `objects/${r.station?.id}` }">
+                <v-btn
+                  class="simple-btn"
+                  depressed
+                >
+                  Подробнее
+                </v-btn>
+              </NuxtLink>
             </div>
           </div>
         </v-col>
@@ -106,29 +87,47 @@ export default {
   layout: 'lk',
   data () {
     return {
-      loading: false,
+      loadingStations: true,
+      objects: [],
     }
   },
   mounted () {
-    this.getStation();
+    this.getStations();
   },
   methods: {
-    getStation () {
-      this.$axios.get('nowplaying/1')
+    getStations () {
+      this.$axios.get('stations')
         .then((result) => {
-          const track = result.data.now_playing;
-          const station = result.data.station;
+          if (result?.data) {
+            this.objects = [ ...result.data ];
 
-          this.$nuxt.$emit('change-song', {
-            ...track,
-            ...station
-          });
+            this.getStationsInfo();
+          }
         })
         .catch((err) => {
           console.error(err);
         });
+    },
+    getStationsInfo () {
+      for (const [index, r] of this.objects.entries()) {
+        this.$axios.get(`nowplaying/${r.id}`)
+          .then((result) => {
+            if (result?.data) {
+              this.objects[index] = result.data;
+            }
+
+            if (index === this.objects.length - 1) {
+              setTimeout(() => {
+                this.loadingStations = false;
+              }, 1500)
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     }
-  }
+  },
 }
 </script>
 
